@@ -236,15 +236,15 @@ plot(air_KC1$no2, air_KC1$pm2.5,
 
 Go to [**Week 5**](https://uclpg-msc-sgds.github.io/GEOG0186/06-data_visualisation.html#building-block-for-creating-a-plot-length-005257) as we covered the coding on creating graphs extensively!
 
-What this image illustrates - if there's an increase in the NO2 levels, it shows as positive increase in PM2.5 as well. This relationship is only shown visually. We can quantify the strength by performing a correlation test between **NO2** versus **PM2.5** using the `cor.test()` function:
+The scatterplot compares pollutant **levels**. To ask whether the pollutants rise and fall together from one day to the next, compare their **day-to-day changes**. Make sure the rows are ordered by date before using `diff()`. It subtracts each value from the next, so a difference spans one day only when the dates are consecutive. Keep missing readings as `NA` so that differences across missing readings are also missing.
 
 ```{r, correlation_test}
-# use diff() to remove trends, seasonality 
+# Calculate changes between consecutive daily readings.
 cor.test(diff(air_KC1$no2), diff(air_KC1$pm2.5))
 ```
 
 :::{.callout-important}
-**Interpretation**: The correlation between the changes in NO₂ and the changes in PM2.5 is **0.4206**. This indicates a moderate positive relationship i.e., When NO2 increases from one time point to the next, PM2.5 also tends to increase, and when NO2 decreases, PM2.5 tends to decrease. The p-value is extremely small (way below 0.05), meaning that the probability of observing a correlation this strong (or stronger) is not by chance, and therefore the correlation is statistically significant.
+A positive correlation means that NO₂ and PM2.5 tend to change in the same direction. First differencing can reduce a trend, but seasonal patterns and serial correlation may remain. The usual correlation-test p-value assumes that the paired changes are independent across days, so interpret it cautiously.
 :::
 
 ### Linear regression
@@ -265,10 +265,10 @@ modelfit <- lm(diff(air_KC1$pm2.5) ~ diff(air_KC1$no2))
 summary(modelfit)
 ```
 
-The above code `lm(diff(pm25) ~ diff(no2))` means that we are modelling the change in PM2.5 as a function of the change in NO2. From the printed output, the explore the following results:
+The model uses day-to-day changes in both pollutants. Its slope estimates the average difference in PM2.5 change associated with a one-unit increase in NO₂ change. Interpret the usual regression p-values cautiously if model residuals remain correlated over time.
 
 - **Intercept** (0.005887): The intercept is essentially zero and is not statistically significant (p = 0.985 which is bigger than 0.05). This means that when there is no change in NO2, the expected change in PM2.5 is 0.005887 which is effectively zero.
-- **Slope for NO2 [0.324 (p < 0.001)]**: The slope is the key result - here, for every unit increase in NO2 will result in PM2.5 to increases on average by 0.324 µg/m³. This increase is significant because its p-value is below 0.05. A small note - this confirms a moderate, positive, and statistically significant short-term association between the two pollutants, and it aligns with the correlation result we previously obtained (0.4206).
+- **Slope for NO2 [0.324 (p < 0.001)]**: The slope is the key result - here, for every unit increase in NO2 will result in PM2.5 to increases on average by 0.324 µg/m³. The positive slope describes the same direction of association as the correlation.
 - **Model fit (0.1741)**: The R² of 0.1741, which means that 17.41% of the variation in changes in PM2.5 is explained by changes in NO2. Generally, its a poor model if this is below 20%. 20-40% is moderate; 40-70% is good; and anything above 70% is an excellent model.
 
 That is how you perform a regression model - the main resul of interest is the **slope** and its **p-value**.
@@ -306,7 +306,7 @@ From the above information, use the `importAURN()` code to extract all 2025 meas
 
 Provide the necessary interpretation of their relationship.
 
-**HINTS**: Because the data points are time-series - make sure to use the `diff()` in the `cor.test()` or `lm()` to de-trend observations, as well as remove any autocorrelation between lagged values for both **PM2.5** and **PM10**. Lastly, when building your regression model - the code should look something like: `lm(diff(pm10) ~ diff(pm2.5))` so that it is modelling the change in PM10 as a function of the change in PM2.5.
+**Hint.** Analyse each station separately. Sort its readings by date and check that the dates are consecutive before calculating daily changes with `diff()`. Keep missing readings as `NA` so that changes spanning those readings remain missing. For the regression, use `lm(diff(pm10) ~ diff(pm2.5))` with the two pollutant vectors from that station. The slope describes how changes in PM10 are associated with changes in PM2.5. Seasonal patterns and serial correlation may remain after differencing.
 
 :::{.callout-important}
 **Submission Deadline: Thursday 27th November, 2025**
