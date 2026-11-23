@@ -485,8 +485,19 @@ Important
 </ol>
 </div>
 </div>
-<div class="(.callout-warning)">
-<p>Suppose that repeat pollution measurements were taken at the <strong>same</strong> location but at different time points - your dataset is structure as <strong>before</strong> and <strong>after</strong> scenario. Here you must used a <strong>paired t-test</strong> <strong>NOT</strong> the <strong>unpaired</strong> one! In the <code>t.test()</code> make sure to set the option <code>paired = TRUE</code> to perform a <strong>paired t-test</strong>!</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>When should you use a paired t-test?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>paired = TRUE</code> when each reading has a meaningful match in the other group. For example, you might measure PM2.5 before and after an intervention at each of several monitoring sites, with one before-and-after pair per site. Put the readings in the same site order in both vectors and keep only complete pairs. The test asks whether the mean difference within pairs is zero.</p>
+<p>Readings from the same location at different times need a matching rule to form pairs. Use an unpaired test for independent groups. Both approaches assume independence across the observations being tested, or across the within-pair differences for a paired test. Nearby observations in an air-quality time series may be correlated, so interpret the p-value cautiously.</p>
+</div>
 </div>
 <p>Okay folks, that is how you execute a <strong>t-test</strong>. Now, you should be able to do the final worksheet, and adapt the codes to your own dataset.</p>
 </section>
