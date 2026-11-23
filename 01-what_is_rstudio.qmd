@@ -1,0 +1,87 @@
+---
+title: "What is RStudio (or R)?"
+---
+
+# Introduction {.unnumbered}
+
+R (or RStudio) is a statistical programming package that allows users to carry out a wide range of statistical analyses. It can also function as GIS software, enabling various types of analysis on geographical data. In the same way, it can be used for data management and geoprocessing—for example, importing different types of data, whether non-spatial or spatial, and preparing them for analysis.
+
+There are two versions:
+
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=TRUE,}
+knitr::include_graphics('assets/all_images/getting_started/00_R_versiontypes.png', error = FALSE) 
+```
+
+The famous icon on the left is the version for [**R (Base)**](https://www.r-project.org), and the one on the right is the version for [**RStudio**](https://www.rstudio.com). Both software packages are the same. The only difference is that RStudio is attractive, intuitive, and more importantly, it is user-friendly than Base R. So, we will be using this version (i.e., RStudio) throughout this workshop. 
+
+Let us talk about the installation of RStudio on your personal computer.
+
+## Download and Installation of Software {.unnumbered}
+
+## RStudio and Downloading it (Length: 00:11:35) {.unnumbered}
+
+```{r, warnings=FALSE, message=FALSE, echo=FALSE}
+library(vembedr)
+embed_youtube('4TAAwv0En6o', height=400, allowfullscreen = TRUE) %>% use_align('center')
+```
+[[**Watch on YouTube**]](https://youtu.be/4TAAwv0En6o)
+
+RStudio is an open-source software, it is free. It is widely recommended in data science, scientific research, and technical communication because it is easy to access, download, and install.
+
+To use RStudio, you must first install R (Base) before installing RStudio. Follow the steps below to install both programs for your operating system (Windows or Mac).
+
+**Steps**
+
+1. Download the R (Base) installer from the table below, then run the file to complete the installation.
+2. Next, download the RStudio installer from the table below, then run the file to complete the installation. 
+
+**OS User type**| **R (Base)** | **RStudio Desktop**
+------------ | ------------- | -------------
+Windows | [**R-4.6.1-win.exe**](https://cran.r-project.org/bin/windows/base/R-4.6.1-win.exe)| [**RStudio-2026.09.0-174.exe**](https://download1.rstudio.org/electron/windows/RStudio-2026.09.0-174.exe)
+MAC (Intel) | [**R-4.6.1-x86_64.pkg**](https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.6.1-x86_64.pkg)| [**RStudio-2026.09.0-174.dmg**](https://download1.rstudio.org/electron/macos/RStudio-2026.09.0-174.dmg)
+MAC (M1-5) | [**R-4.6.1-arm64.pkg**](https://cran.r-project.org/bin/macosx/sonoma-arm64/base/R-4.6.1-arm64.pkg)| [**RStudio-2026.09.0-174.dmg**](https://download1.rstudio.org/electron/macos/RStudio-2026.09.0-174.dmg)
+
+:::{.callout-important}
+**R (Base)** is very particular about the operating system! Please be sure to use the correct installer for your computer:
+
+- **Windows** users: use the files in the first row.
+- **Mac (Intel)** users: use the files in the second row.
+- **Mac (M1-5 chip)** users: use the files in the third row.
+:::
+
+This section covers how to download and install RStudio for it to be used locally on your machine. There are several ways to access RStudio: 
+
+- Directly through UCL Workstation PC
+- Remotely through the UCL Desktop@Anywhere remote service with your laptop.
+
+Let us quickly go through these options. 
+
+## Access through Workstation & UCL Applications Store (Length: 00:05:00) {.unnumbered}
+
+```{r, warnings=FALSE, message=FALSE, echo=FALSE}
+library(vembedr)
+embed_youtube('M0aC9GqNt3M', height=400, allowfullscreen = TRUE) %>% use_align('center')
+```
+[[**Watch on YouTube**]](https://youtu.be/M0aC9GqNt3M)
+
+Go to any PC cluster in UCL and simply log on to a computer. Use the UCL Applications tool to access the desired software. 
+
+## Remotely Access through UCL Desktop@Anywhere (Length: 00:09:34) {.unnumbered}
+
+```{r, warnings=FALSE, message=FALSE, echo=FALSE}
+library(vembedr)
+embed_youtube('hwGHlFZ9UDY', height=400, allowfullscreen = TRUE) %>% use_align('center')
+```
+[[**Watch on YouTube**]](https://youtu.be/hwGHlFZ9UDY)
+
+To use RStudio (or any other software which UCL provides as service to students) remotely from your laptop/PC/tablet, you can:
+
+- Go to [https://www.ucl.ac.uk/isd/services/computers/remote-access/desktopucl-anywhere](https://www.ucl.ac.uk/isd/services/computers/remote-access/desktopucl-anywhere).
+- Click on the blue button that says: "**Log in to Desktop @ UCL Anywhere.**"
+- You will be prompted to enter your UCL username (username@ucl.ac.uk) and password. Enter the correct credentials to gain access to the remote portal.
+- If you see the option "**Use Web Browser**", select it to run the remote functions directly in your browser without installing the Citrix Workspace application.
+- You should now see a Desktop @ UCL Anywhere button – click this button to complete the login. At this point, it will feel as though you are using a UCL workstation in a cluster room or library, but remotely.
+- On the desktop, click the UCL Applications icon and search for RStudio.
+- Select the latest version available (check the year) and open it with a single click (not multiple clicks).
+
+Voilà! You now have remote access to RStudio.

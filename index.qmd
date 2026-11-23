@@ -1,0 +1,22 @@
+---
+title: "Quantitative Skills for SDS Students"
+subtitle: "GEOG0191 · 2026/27"
+---
+
+## Welcome
+
+This short course introduces RStudio and base R through examples from air quality. Work through the preparation at your own pace before the first group session.
+
+## Before Week 8
+
+1. Use [What is RStudio?](01-what_is_rstudio.qmd) to install R and RStudio or find out how to access them through UCL.
+2. Work through the [Base R primer](02-base_r_primer.qmd). Allow 30–45 minutes to run the examples and try the exercises.
+
+## Group sessions
+
+Both group sessions run from **11 am to noon**.
+
+| Session | Worksheet |
+|---|---|
+| Week 8 | [London air quality: relationships](09-london_airquality_relationships.qmd) |
+| Week 9 | [London air quality: t-tests](10-london_airquality_ttests.qmd) |

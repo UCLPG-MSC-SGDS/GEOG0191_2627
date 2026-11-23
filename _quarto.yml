@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+
+lang: en
+
+website:
+  title: "GEOG0191 · Quantitative Skills for SDS Students"
+  page-navigation: true
+  search: true
+  sidebar:
+    style: floating
+    contents:
+      - text: "Module overview"
+        file: index.qmd
+      - text: "What is RStudio?"
+        file: 01-what_is_rstudio.qmd
+      - text: "Base R primer"
+        file: 02-base_r_primer.qmd
+      - text: "Week 8 · Air-quality relationships"
+        file: 09-london_airquality_relationships.qmd
+      - text: "Week 9 · Air-quality t-tests"
+        file: 10-london_airquality_ttests.qmd
+
+format:
+  html:
+    theme:
+      light: minty
+      dark: darkly
+    css: assets/all_css/styles.css
+    toc: true
+    smooth-scroll: true
+    highlight-style: atom-one

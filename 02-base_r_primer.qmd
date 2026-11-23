@@ -1,0 +1,116 @@
+---
+title: "Base R primer"
+---
+
+Set aside **30–45 minutes**. You’ll use a small set of fictional air-quality readings to practise running R code, inspecting a dataset, calculating summaries and making plots.
+
+## 1. Run code in RStudio
+
+Use **File > New File > R Script** and save the script as `air-quality-practice.R`. Copy each example into the script. Put your cursor on a line and press **Ctrl+Enter** on Windows or **Cmd+Enter** on Mac. For a command that spans several lines, select the whole command before running it. Results appear in the **Console**, saved objects in the **Environment**, and charts in **Plots**. Lines beginning with `#` are comments.
+
+```{r}
+# Save four readings in a vector.
+readings <- c(12, 15, 18, 21)
+readings
+mean(readings)
+```
+
+`<-` saves a value under a name. `c()` combines values into a vector. In `mean(readings)`, `mean()` is the function and `readings` is its argument. Text such as `"Roadside"` goes in quotes. `TRUE` and `FALSE` are logical values, and `NA` marks a missing value.
+
+**Try it.** Add a reading of 24 and recalculate the mean.
+
+::: {.callout-tip collapse="true"}
+## Check your answer
+
+Run `readings <- c(12, 15, 18, 21, 24)` and then `mean(readings)`. The result is 18.
+:::
+
+## 2. Inspect and filter a data frame
+
+Run the whole block to create the practice data. Each row represents a reading and each column contains one variable. Both pollutants are measured in micrograms per cubic metre (µg/m³).
+
+```{r}
+air <- data.frame(
+  day = c(1, 2, 3, 4, 1, 2, 3, 4),
+  site = c("Roadside", "Roadside", "Roadside", "Roadside",
+           "Park", "Park", "Park", "Park"),
+  no2 = c(32, 40, 36, 43, 18, 22, 20, 26),
+  pm25 = c(14, 17, NA, 20, 8, 9, 10, 13)
+)
+
+head(air)
+str(air)
+air$pm25
+air[air$site == "Park", c("day", "pm25")]
+```
+
+Use `$` to select a named column. In `air[rows, columns]`, the expression before the comma selects rows and the expression after it selects columns. `==` checks whether values match. For a worksheet supplied as a CSV, `air <- read.csv("air-quality.csv")` would load it if that file were in R’s working directory. Use `getwd()` to check the directory.
+
+**Try it.** Show all columns for the roadside readings.
+
+::: {.callout-tip collapse="true"}
+## Check your answer
+
+`air[air$site == "Roadside", ]` returns four rows. The empty space after the comma keeps all columns.
+:::
+
+## 3. Summarise the readings
+
+```{r}
+summary(air$pm25)
+mean(air$pm25, na.rm = TRUE)
+median(air$pm25, na.rm = TRUE)
+sd(air$pm25, na.rm = TRUE)
+IQR(air$pm25, na.rm = TRUE)
+```
+
+The mean and median describe the centre. The standard deviation and interquartile range describe spread. `summary()` also shows the minimum, maximum and quartiles for a numeric column. `na.rm = TRUE` skips missing values for that calculation.
+
+```{r}
+tapply(air$pm25, air$site, mean, na.rm = TRUE)
+```
+
+`tapply()` applies a function to groups. Here it takes the PM2.5 values, splits them by site and calculates a mean for each site.
+
+**Try it.** Change the command to calculate the median PM2.5 for each site.
+
+::: {.callout-tip collapse="true"}
+## Check your answer
+
+`tapply(air$pm25, air$site, median, na.rm = TRUE)` gives 9.5 for Park and 17 for Roadside.
+:::
+
+## 4. Make two plots
+
+A scatterplot shows how two numeric variables vary together. Here NO₂ is on the horizontal axis and PM2.5 is on the vertical axis. The reading with missing PM2.5 is omitted.
+
+```{r}
+#| fig-alt: "Scatterplot of seven readings. PM2.5 tends to rise with NO2."
+plot(air$no2, air$pm25,
+     xlab = "NO2 (µg/m³)", ylab = "PM2.5 (µg/m³)",
+     pch = 19, col = "steelblue")
+```
+
+A boxplot compares distributions between groups. In `pm25 ~ site`, read `~` as “by”. The `data` argument tells R where to find the columns.
+
+```{r}
+#| fig-alt: "Two boxplots comparing PM2.5. Roadside readings are higher than park readings."
+boxplot(pm25 ~ site, data = air,
+        xlab = "Site", ylab = "PM2.5 (µg/m³)",
+        col = "lightblue")
+```
+
+**Try it.** Make a boxplot of NO₂ by site. Which site has the higher median?
+
+::: {.callout-tip collapse="true"}
+## Check your answer
+
+`boxplot(no2 ~ site, data = air, ylab = "NO2 (µg/m³)")` shows a higher median at the roadside site.
+:::
+
+## Ready for the worksheets?
+
+Run your script from the top. Pick a command and change one argument, then explain what changed in the output.
+
+- [Week 8 · Air-quality relationships](09-london_airquality_relationships.qmd) uses scatterplots, `cor.test()` and `lm()` to explore relationships between pollutants.
+- [Week 9 · Air-quality t-tests](10-london_airquality_ttests.qmd) uses group summaries, boxplots and `t.test()` to compare pollutant levels.
